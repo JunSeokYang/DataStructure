@@ -3,16 +3,18 @@
 using namespace std;
 
 int BFS(vector<vector<int> > &arr, vector<int> &visit, int p, int q){
+	if(p == q)
+		return 0;
     queue<int> nodelist;
     int m;
     nodelist.push(p);
     while(!nodelist.empty()){
         m = nodelist.front();
         nodelist.pop();
-        if(m == q)
-            return visit[m];
         for(auto i=++arr[m].begin(); i != arr[m].end(); ++i)
-            if(!visit[*i]){
+            if(!visit[*i]){				
+				if(*i == q)
+					return visit[m]+1;
                 visit[*i] = visit[m] + 1;
                 nodelist.push(*i);
             }
